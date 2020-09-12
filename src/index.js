@@ -1,14 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App.js";
-import "./index.css";
+import "./index.scss";
+import "antd/dist/antd.css";
 import { BrowserRouter } from "react-router-dom";
 
-ReactDOM.render(
-  <>
+import useGlobalState from "./store/useGlobalState";
+import Context from "./store/context";
+
+const Index = () => {
+  const store = useGlobalState();
+  return (
     <BrowserRouter>
-      <App />
+      <Context.Provider value={store}>
+        <App />
+      </Context.Provider>
     </BrowserRouter>
-  </>,
-  document.getElementById("root")
-);
+  );
+};
+
+ReactDOM.render(<Index />, document.getElementById("root"));

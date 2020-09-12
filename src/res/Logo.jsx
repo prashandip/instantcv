@@ -1,23 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { string, number } from "prop-types";
-import "./Logo.css";
 import { css } from "emotion";
 
 const Logo = (props) => {
-  const [color, setColor] = useState(props.defaultColor);
+  const color = props.color;
   const width = (props.height * 3) / 4;
   const style = css`
     transition: 0.8s ease-in-out;
-    filter: drop-shadow(0px 0px 5px ${props.defaultShadow});
-    :hover {
-      filter: drop-shadow(0px 0px 5px ${props.hoverShadow});
-    }
+    filter: drop-shadow(0px 0px 5px ${props.shadow});
   `;
   return (
     <svg
       className={style}
-      onMouseOver={() => setColor(props.hoverColor)}
-      onMouseOut={() => setColor(props.defaultColor)}
       version="1.1"
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
@@ -2536,16 +2530,12 @@ export default Logo;
 
 Logo.propTypes = {
   height: number,
-  defaultColor: string,
-  defaultShadow: string,
-  hoverColor: string,
-  hoverShadow: string,
+  color: string,
+  shadow: string,
 };
 
 Logo.defaultProps = {
   height: 240,
-  defaultColor: "#202020",
-  defaultShadow: "#00ffff",
-  hoverColor: "#00ffff",
-  hoverShadow: "#778899",
+  color: "#202020",
+  shadow: "#00ffff",
 };

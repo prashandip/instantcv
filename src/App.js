@@ -1,16 +1,22 @@
 import React from "react";
-import Logo from "./res/Logo";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import About from "./components/About";
+import Templates from "./components/Templates";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 const App = () => {
   return (
     <>
-      <Logo
-        defaultColor="#007791"
-        defaultShadow="#000"
-        hoverColor="#000"
-        hoverShadow="#00ffff"
-      />
-      <p>Hello World!</p>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/templates" component={Templates} />
+        <Redirect to="/" />
+      </Switch>
     </>
   );
 };

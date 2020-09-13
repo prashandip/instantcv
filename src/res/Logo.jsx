@@ -1,13 +1,14 @@
-import React from "react";
-import { string, number } from "prop-types";
+import React, { useContext } from "react";
 import { css } from "emotion";
 
-const Logo = (props) => {
-  const color = props.color;
-  const width = (props.height * 3) / 4;
+const Logo = () => {
+  const height = 240;
+  const color = "#00ffff";
+  const shadow = "#000000";
+  const width = (height * 3) / 4;
   const style = css`
     transition: 0.8s ease-in-out;
-    filter: drop-shadow(0px 0px 5px ${props.shadow});
+    filter: drop-shadow(0px 0px 5px ${shadow});
   `;
   return (
     <svg
@@ -22,7 +23,7 @@ const Logo = (props) => {
         width:height = 3:4 
         ====================================== */
       width={width}
-      height={props.height}
+      height={height}
       viewBox="0 0 180 240"
       enableBackground="new 0 0 180 240"
       xmlSpace="preserve"
@@ -2527,15 +2528,3 @@ const Logo = (props) => {
 };
 
 export default Logo;
-
-Logo.propTypes = {
-  height: number,
-  color: string,
-  shadow: string,
-};
-
-Logo.defaultProps = {
-  height: 240,
-  color: "#202020",
-  shadow: "#00ffff",
-};

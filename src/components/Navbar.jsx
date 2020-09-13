@@ -1,19 +1,82 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Switch } from "antd";
+import { Global, css } from "@emotion/core";
+import { Context } from "./../res/Store";
 
 const Navbar = () => {
-  const [darkThemeOn, setDarkThemeOn] = useState(false);
-
-  const themeSwitch = () => {
-    darkThemeOn ? setDarkThemeOn(false) : setDarkThemeOn(true);
+  const [state, setState] = useContext(Context);
+  const switchTheme = () => {
+    if (state.theme === "LIGHT") {
+      setState({
+        theme: "DARK",
+        fontColor: "#00ffff",
+        color1: "#00ffff",
+        color2: "#7fffd4",
+      });
+    } else {
+      setState({
+        theme: "LIGHT",
+        fontColor: "#1c1c1c",
+        color1: "#565387",
+        color2: "#3498db",
+      });
+    }
   };
+  const color = (
+    <Global
+      styles={css`
+        body {
+          color: ${state.fontColor} !important;
+        }
+        .nav-link {
+          color: ${state.color1} !important;
+        }
+        .navbar-brand {
+          color: ${state.color1} !important;
+        }
+        .menu_active {
+          border-bottom: 1px solid ${state.color1};
+        }
+        .navbar a:hover {
+          color: ${state.color2} !important;
+        }
+      `}
+    />
+  );
+  let navbarTheme;
+  let background;
+  if (state.theme === "LIGHT") {
+    navbarTheme = "navbar-light";
+    background = (
+      <Global
+        styles={css`
+          body {
+            background: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+          }
+        `}
+      />
+    );
+  } else {
+    navbarTheme = "navbar-dark";
+    background = (
+      <Global
+        styles={css`
+          body {
+            background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+          }
+        `}
+      />
+    );
+  }
   return (
     <>
+      {color}
+      {background}
       <div className="container-fluid nav_bg">
         <div className="row">
           <div className="col-10 mx-auto">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className={"navbar navbar-expand-lg bg-light " + navbarTheme}>
               <div className="container-fluid">
                 <NavLink
                   activeClassName="menu_active"
@@ -24,11 +87,16 @@ const Navbar = () => {
                   Instant CV
                 </NavLink>
 
-                <Switch onClick={themeSwitch} />
+                <div>
+                  <span>
+                    <strong>Dark Theme </strong>
+                  </span>
+                  <Switch onClick={switchTheme} />
+                </div>
 
                 {/* =========== Navbar Toggler =============== */}
                 <button
-                  className="navbar-toggler"
+                  className={"navbar-toggler " + navbarTheme}
                   type="button"
                   data-toggle="collapse"
                   data-target="#navbarSupportedContent"

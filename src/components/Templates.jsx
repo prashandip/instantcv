@@ -1,11 +1,12 @@
 import React from "react";
+import Store from "../res/Store";
 import Logo from "./../res/Logo";
 
 const Templates = () => {
   return (
     <>
       <h1>Templates</h1>
-      <Logo color="#007791" shadow="#000" />
+      <Logo />
     </>
   );
 };

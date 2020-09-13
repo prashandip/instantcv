@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import Store, { Context } from "../res/Store";
 import Logo from "./../res/Logo";
 
 const Home = () => {
+  const [state, setState] = useContext(Context);
+
   return (
     <>
-      <h1>Home</h1>
-      <Logo color="#007791" shadow="#000" />
+      <h1>Home </h1>
+      <Logo />
     </>
   );
 };

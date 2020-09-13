@@ -5,16 +5,10 @@ import "./index.scss";
 import "antd/dist/antd.css";
 import { BrowserRouter } from "react-router-dom";
 
-import useGlobalState from "./store/useGlobalState";
-import Context from "./store/context";
-
 const Index = () => {
-  const store = useGlobalState();
   return (
     <BrowserRouter>
-      <Context.Provider value={store}>
-        <App />
-      </Context.Provider>
+      <App />
     </BrowserRouter>
   );
 };
